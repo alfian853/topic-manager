@@ -48,8 +48,8 @@ public class RegistryServiceImpl implements RegistryService {
     response.getMessages().addAll(this.updatePublisherAndGetMessages(service, registryRequest));
     response.getMessages().addAll(this.updateSubscriberAndGetMessages(service, registryRequest));
 
-    service.setPublisherOfTopics(registryRequest.getPublishedTopics());
-    service.setSubscriberOfTopics(registryRequest.getSubscribedTopics());
+    service.setPublishedTopics(registryRequest.getPublishedTopics());
+    service.setSubscribedTopics(registryRequest.getSubscribedTopics());
 
     serviceGroupRepository.save(service);
 
@@ -64,7 +64,7 @@ public class RegistryServiceImpl implements RegistryService {
 
     List<DiffResult<String>> diffResults
       = DiffUtil.getDiff(
-      serviceGroup.getPublisherOfTopics(),//firtlist
+      serviceGroup.getPublishedTopics(),//firtlist
       registryRequest.getPublishedTopics(),//secondlist
       String::compareTo
     );
@@ -127,7 +127,7 @@ public class RegistryServiceImpl implements RegistryService {
 
     List<DiffResult<String>> diffResults
       = DiffUtil.getDiff(
-        serviceGroup.getSubscriberOfTopics(),//firtlist
+        serviceGroup.getSubscribedTopics(),//firtlist
         registryRequest.getSubscribedTopics(),//secondlist
         String::compareTo
     );

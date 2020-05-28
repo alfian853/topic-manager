@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 public class ServiceGroupInfoServiceImpl implements ServiceGroupInfoService {
@@ -26,8 +28,8 @@ public class ServiceGroupInfoServiceImpl implements ServiceGroupInfoService {
 
     return ServiceInfoResponse.builder()
       .serviceName(serviceName)
-      .publisherOfTopics(serviceGroup.getPublisherOfTopics())
-      .subscriberOfTopics(serviceGroup.getSubscriberOfTopics())
+      .publishedTopics(serviceGroup.getPublishedTopics())
+      .subscribedTopics(serviceGroup.getSubscribedTopics())
       .build();
   }
 
@@ -40,13 +42,15 @@ public class ServiceGroupInfoServiceImpl implements ServiceGroupInfoService {
 
     if(AnalyzeOption.PUBLISHED_TOPIC.isTrue(serviceAnalyzeRequest.getOptionsState())){
       response.setPublishedTopicsWarning(
-        serviceGroupRepository.getServiceGroupIgnoreSubscribedTopic(serviceAnalyzeRequest.getServiceName()).getPublisherOfTopics()
+        serviceGroupRepository.getServiceGroupIgnoreSubscribedTopic(serviceAnalyzeRequest.getServiceName()).getPublishedTopics()
+          .stream().map(topic -> topic + ": has no registered subscriber").collect(Collectors.toList())
       );
     }
 
     if(AnalyzeOption.SUBSCRIBED_TOPIC.isTrue(serviceAnalyzeRequest.getOptionsState())){
       response.setSubscribedTopicsWarning(
-        serviceGroupRepository.getServiceGroupIgnorePublishedTopic(serviceAnalyzeRequest.getServiceName()).getSubscriberOfTopics()
+        serviceGroupRepository.getServiceGroupIgnorePublishedTopic(serviceAnalyzeRequest.getServiceName()).getSubscribedTopics()
+          .stream().map(topic -> topic + ": has no registered publisher").collect(Collectors.toList())
       );
     }
 

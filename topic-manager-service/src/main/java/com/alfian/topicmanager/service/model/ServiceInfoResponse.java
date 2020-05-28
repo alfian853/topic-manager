@@ -17,8 +17,8 @@ public class ServiceInfoResponse {
 
   private String serviceName;
 
-  private List<String> publisherOfTopics = new ArrayList<>();
+  private List<String> publishedTopics = new ArrayList<>();
 
-  private List<String> subscriberOfTopics = new ArrayList<>();
+  private List<String> subscribedTopics = new ArrayList<>();
 
 }

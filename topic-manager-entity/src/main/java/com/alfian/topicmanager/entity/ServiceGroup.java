@@ -12,16 +12,16 @@ import java.util.List;
 public class ServiceGroup {
 
   public static final String SERVICE_NAME = "serviceName";
-  public static final String PUBLISHER_OF_TOPICS = "publisherOfTopics";
-  public static final String SUBSCRIBER_OF_TOPICS = "subscriberOfTopics";
+  public static final String PUBLISHER_OF_TOPICS = "publishedTopics";
+  public static final String SUBSCRIBER_OF_TOPICS = "subscribedTopics";
 
   @Id
   private String id;
 
   private String serviceName;
 
-  private List<String> publisherOfTopics = new ArrayList<>();
+  private List<String> publishedTopics = new ArrayList<>();
 
-  private List<String> subscriberOfTopics = new ArrayList<>();
+  private List<String> subscribedTopics = new ArrayList<>();
 
 }
