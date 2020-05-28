@@ -56,12 +56,12 @@ options: SUBSCRIBED_TOPIC,PUBLISHED_TOPIC
 ```json
 {
   "publishedTopicsWarning": [
-    "foo-service-event-1: has no registered subscriber",
-    "foo-service-event-2: has no registered subscriber"
+    "foo-service-event-1: no registered subscriber",
+    "foo-service-event-2: no registered subscriber"
   ],
   "subscribedTopicsWarning": [
-    "bar-service-event-1: has no registered publisher",
-    "foobar-service-event-2: has no registered publisher"
+    "bar-service-event-1: no registered publisher",
+    "foobar-service-event-2: no registered publisher"
   ]
 }
 ```
