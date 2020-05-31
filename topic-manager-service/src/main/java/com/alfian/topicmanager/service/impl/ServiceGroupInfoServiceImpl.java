@@ -40,14 +40,14 @@ public class ServiceGroupInfoServiceImpl implements ServiceGroupInfoService {
 
     ServiceAnalyzeResponse response = new ServiceAnalyzeResponse();
 
-    if(AnalyzeOption.PUBLISHED_TOPIC.isTrue(serviceAnalyzeRequest.getOptionsState())){
+    if(serviceAnalyzeRequest.getOptionsState().isTrue(AnalyzeOption.PUBLISHED_TOPIC)){
       response.setPublishedTopicsWarning(
         serviceGroupRepository.getServiceGroupIgnoreSubscribedTopic(serviceAnalyzeRequest.getServiceName()).getPublishedTopics()
           .stream().map(topic -> topic + ": has no registered subscriber").collect(Collectors.toList())
       );
     }
 
-    if(AnalyzeOption.SUBSCRIBED_TOPIC.isTrue(serviceAnalyzeRequest.getOptionsState())){
+    if(serviceAnalyzeRequest.getOptionsState().isTrue(AnalyzeOption.SUBSCRIBED_TOPIC)){
       response.setSubscribedTopicsWarning(
         serviceGroupRepository.getServiceGroupIgnorePublishedTopic(serviceAnalyzeRequest.getServiceName()).getSubscribedTopics()
           .stream().map(topic -> topic + ": has no registered publisher").collect(Collectors.toList())
